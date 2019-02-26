@@ -7,7 +7,6 @@ appveyor:
 
 provider:
   osx: azure
-  linux: azure
 
 azure:
   upload_packages: true
