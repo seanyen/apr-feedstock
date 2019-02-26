@@ -21,8 +21,6 @@ was to combine all code in Apache to one common code base.
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/apr-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/apr-feedstock)
-[![OSX](https://img.shields.io/travis/conda-forge/apr-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/apr-feedstock)
 [![Windows](https://img.shields.io/appveyor/ci/conda-forge/apr-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/apr-feedstock/branch/master)
 
 Current release info
