@@ -8,5 +8,6 @@ appveyor:
 provider:
   osx: azure
 
+  win: appveyor
 azure:
   upload_packages: true
