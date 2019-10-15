@@ -34,11 +34,11 @@ if %VS_MAJOR% == 9 (
 )
 
 :: This is required for picking up expat headers and lib
-:: IF "%VS_YEAR%"=="2008" (
-::    SET "ENVOPT=/p:VCBuildUseEnvironment=true"
-:: ) ELSE (
-::    SET "ENVOPT=/p:UseEnv=true"
-:: )
+IF "%VS_YEAR%"=="2008" (
+    SET "ENVOPT=/p:VCBuildUseEnvironment=true"
+) ELSE (
+    SET "ENVOPT=/p:UseEnv=true"
+)
 
 :: APR creates 32 bit builds in the "Debug" and "Release" directories
 :: but 64 bit builds in the "x64\Debug" or "x64\Release" directories.
@@ -56,7 +56,8 @@ msbuild apr-util\aprutil.sln ^
         /p:Configuration=%BUILD_MODE% ^
         /p:Platform=%PLATFORM% ^
         %ENVOPT% ^
-        /t:libaprutil
+        /t:libaprutil ^
+        /verbosity:diag
 
 IF ERRORLEVEL 1 (ECHO Failed to build APR shared library & EXIT /b 1)
 
@@ -64,6 +65,7 @@ msbuild apr-util\aprutil.sln ^
         /p:Configuration=%BUILD_MODE% ^
         /p:Platform=%PLATFORM% ^
         %ENVOPT% ^
-        /t:aprutil
+        /t:aprutil ^
+        /verbosity:diag
 
 IF ERRORLEVEL 1 (ECHO Failed to build APR static library & EXIT /b 1)
