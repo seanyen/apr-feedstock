@@ -1,21 +1,14 @@
-SET PROJ_DIR=apr
-SET PROJ_LIB=%PROJ_DIR:-=%
+pushd apr
 
-SET BUILD_MODE=Release
-SET "SHARED_LIBDIR=x64\%BUILD_MODE%"
-SET "STATIC_LIBDIR=LibR\%SHARED_LIBDIR%"
+mkdir build
+cd build
 
-copy %PROJ_DIR%\%SHARED_LIBDIR%\lib%PROJ_LIB%-1.dll %LIBRARY_BIN%\
-copy %PROJ_DIR%\%SHARED_LIBDIR%\lib%PROJ_LIB%-1.lib %LIBRARY_LIB%\
-IF EXIST %PROJ_DIR%\%SHARED_LIBDIR%\lib%PROJ_LIB%-1.pdb copy %PROJ_DIR%\%SHARED_LIBDIR%\lib%PROJ_LIB%-1.pdb %LIBRARY_BIN%\
+cmake ^
+    -G "NMake Makefiles" ^
+    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -DCMAKE_BUILD_TYPE=Release ^
+    %SRC_DIR%\apr
+if errorlevel 1 exit 1
 
-mkdir %LIBRARY_PREFIX%\LibR
-copy %PROJ_DIR%\%STATIC_LIBDIR%\%PROJ_LIB%-1.lib %LIBRARY_PREFIX%\LibR\
-IF EXIST %PROJ_DIR%\%STATIC_LIBDIR%\%PROJ_LIB%-1.pdb copy %PROJ_DIR%\%STATIC_LIBDIR%\%PROJ_LIB%-1.pdb %LIBRARY_PREFIX%\LibR\
-
-xcopy %PROJ_DIR%\include\*.h %LIBRARY_INC%\
-
-mkdir %LIBRARY_INC%\arch\win32
-
-copy apr\include\arch\apr_private_common.h %LIBRARY_INC%\arch\
-xcopy apr\include\arch\win32\*.h %LIBRARY_INC%\arch\win32\
+nmake install
+if errorlevel 1 exit 1
