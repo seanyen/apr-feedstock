@@ -20,7 +20,7 @@ source:
   - path: cmake/  # [win]
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:                                           # [win]
     - expat                                                     # [win]
   skip: true  # [win and vc<14]
