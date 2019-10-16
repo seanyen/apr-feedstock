@@ -8,33 +8,27 @@ package:
   version: {{ apr_ver }}
 
 source:
-  - url: {{ mirror }}/apr/apr-{{ apr_ver }}.tar.bz2                           # [unix]
-    folder: apr                                                               # [unix]
-    sha256: a67ca9fcf9c4ff59bce7f428a323c8b5e18667fdea7b0ebad47d194371b0a105  # [unix]
-  - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}.tar.bz2                      # [unix]
-    folder: apr-util                                                          # [unix]
-    sha256: d3e12f7b6ad12687572a3a39475545a072608f4ba03a6ce8a3778f607dd0035b  # [unix]
-  - url: {{ mirror }}/apr/apr-iconv-{{ api_ver }}.tar.bz2                     # [unix]
-    folder: apr-iconv                                                         # [unix]
-    sha256: 7d454e0fe32f2385f671000e3b755839d16aabd7291e3947c973c90377c35313  # [unix]
-  - url: {{ mirror }}/apr/apr-{{ apr_ver }}-win32-src.zip                     # [win]
-    folder: apr                                                               # [win]
-    sha256: 922e3e32ca304e864b080236dc490bfc5be0fbdfda3a9f971653dfa8489e0c1c  # [win]
-  - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}-win32-src.zip                # [win]
-    folder: apr-util                                                          # [win]
-    sha256: 9eb17fff6484333fe65b7972411ee33dfdb468896f85add0e1ff1b6751698b41  # [win]
-  - url: {{ mirror }}/apr/apr-iconv-{{ api_ver }}-win32-src.zip               # [win]
-    folder: apr-iconv                                                         # [win]
-    sha256: 7b5dbcf81df98e31ef52deff78eee1746b7ea86025efd220c5faa62fabb76bdf  # [win]
+  - url: {{ mirror }}/apr/apr-{{ apr_ver }}.tar.gz
+    folder: apr
+    sha256: 70dcf9102066a2ff2ffc47e93c289c8e54c95d8dda23b503f9e61bb0cbd2d105
+  - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}.tar.gz
+    folder: apr-util
+    sha256: b65e40713da57d004123b6319828be7f1273fbc6490e145874ee1177e112c459
+  - url: {{ mirror }}/apr/apr-iconv-{{ api_ver }}.tar.gz
+    folder: apr-iconv
+    sha256: ce94c7722ede927ce1e5a368675ace17d96d60ff9b8918df216ee5c1298c6a5e
+  - path: cmake/  # [win]
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:                                           # [win]
     - expat                                                     # [win]
+  skip: true  # [win and vc<14]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - cmake                                                     # [win]
   host:
     - expat                                                     # [win]
   run:
@@ -63,6 +57,7 @@ outputs:
 
         - if not exist %LIBRARY_INC%\\apr.h             exit 1  # [win]
         - if not exist %LIBRARY_BIN%\\libapr-1.dll      exit 1  # [win]
+        - if not exist %LIBRARY_LIB%\\libapr-1.lib      exit 1  # [win]
 
         - test -f ${PREFIX}/include/apr-1/apr.h                 # [unix]
         - test -f ${PREFIX}/lib/libapr-1${SHLIB_EXT}            # [unix]
@@ -88,6 +83,7 @@ outputs:
 
         - if not exist %LIBRARY_INC%\\apu.h             exit 1  # [win]
         - if not exist %LIBRARY_BIN%\\libaprutil-1.dll  exit 1  # [win]
+        - if not exist %LIBRARY_LIB%\\libaprutil-1.lib  exit 1  # [win]
 
         - test -f ${PREFIX}/include/apr-1/apu.h                 # [unix]
         - test -f ${PREFIX}/lib/libaprutil-1${SHLIB_EXT}        # [unix]
@@ -107,7 +103,10 @@ outputs:
     script: install_libapriconv.bat                             # [win]
     test:
       commands:
+        - if not exist %LIBRARY_INC%\\apr_iconv.h       exit 1  # [win]
         - if not exist %LIBRARY_BIN%\\libapriconv-1.dll exit 1  # [win]
+        - if not exist %LIBRARY_LIB%\\libapriconv-1.lib exit 1  # [win]
+        - if not exist %LIBRARY_BIN%\\iconv\\utf-8.so   exit 1  # [win]
         - test -f ${PREFIX}/lib/libapriconv-1${SHLIB_EXT}       # [unix]
 
 about:
@@ -129,3 +128,4 @@ extra:
     - jakirkham
     - mingwandroid
     - nehaljwani
+    - seanyen
