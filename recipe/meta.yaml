@@ -20,7 +20,7 @@ source:
   - path: cmake/  # [win]
 
 build:
-  number: 1
+  number: 2
   ignore_run_exports:                                           # [win]
     - expat                                                     # [win]
   skip: true  # [win and vc<14]
@@ -29,6 +29,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - cmake                                                     # [win]
+    - ninja                                                     # [win]
   host:
     - expat                                                     # [win]
   run:
