@@ -1,14 +1,11 @@
-pushd apr
+set SUBPKG=apr
 
-mkdir build
-cd build
-
-cmake ^
-    -GNinja ^
-    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+cmake -GNinja ^
+    -S%SRC_DIR%\%SUBPKG% ^
+    -B%SRC_DIR%\%SUBPKG%.build ^
     -DCMAKE_BUILD_TYPE=Release ^
-    %SRC_DIR%\apr
+    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%
 if errorlevel 1 exit 1
 
-nmake install
+cmake --build %SRC_DIR%\%SUBPKG%.build -- install
 if errorlevel 1 exit 1
