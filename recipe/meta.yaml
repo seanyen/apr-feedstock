@@ -49,6 +49,8 @@ outputs:
       build:
         - {{ compiler('c') }}
         - make                                                  # [unix]
+        - cmake                                                 # [win]
+        - ninja                                                 # [win]
       host:
     script: install_libapr.sh                                   # [unix]
     script: install_libapr.bat                                  # [win]
@@ -72,6 +74,8 @@ outputs:
       build:
         - {{ compiler('c') }}
         - make                                                  # [unix]
+        - cmake                                                 # [win]
+        - ninja                                                 # [win]
       host:
         - expat
         - libapr
@@ -98,6 +102,8 @@ outputs:
       build:
         - {{ compiler('c') }}
         - make                                                  # [unix]
+        - cmake                                                 # [win]
+        - ninja                                                 # [win]
       host:
         - libapr
     script: install_libapriconv.sh                              # [unix]
