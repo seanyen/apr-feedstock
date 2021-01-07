@@ -20,7 +20,7 @@ source:
   - path: cmake/  # [win]
 
 build:
-  number: 2
+  number: 3
   ignore_run_exports:                                           # [win]
     - expat                                                     # [win]
   skip: true  # [win and vc<14]
@@ -30,6 +30,7 @@ requirements:
     - {{ compiler('c') }}
     - cmake                                                     # [win]
     - ninja                                                     # [win]
+    - libtool  # [not win]
   host:
     - expat                                                     # [win]
   run:
@@ -51,6 +52,7 @@ outputs:
         - make                                                  # [unix]
         - cmake                                                 # [win]
         - ninja                                                 # [win]
+        - libtool  # [not win]
       host:
     script: install_libapr.sh                                   # [unix]
     script: install_libapr.bat                                  # [win]
@@ -76,6 +78,7 @@ outputs:
         - make                                                  # [unix]
         - cmake                                                 # [win]
         - ninja                                                 # [win]
+        - libtool  # [not win]
       host:
         - expat
         - libapr
@@ -104,6 +107,7 @@ outputs:
         - make                                                  # [unix]
         - cmake                                                 # [win]
         - ninja                                                 # [win]
+        - libtool  # [not win]
       host:
         - libapr
     script: install_libapriconv.sh                              # [unix]
