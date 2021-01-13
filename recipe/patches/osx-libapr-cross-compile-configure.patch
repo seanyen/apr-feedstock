@@ -1,0 +1,10 @@
+--- configure.orig	2021-01-11 22:06:48.000000000 -0800
++++ configure	2021-01-11 22:07:34.000000000 -0800
+@@ -650,6 +650,7 @@
+ EXTRA_LDFLAGS
+ EXTRA_CFLAGS
+ EXTRA_CPPFLAGS
++cross_compiling
+ apr_has_user
+ apr_thread_func
+ apr_procattr_user_set_requires_password

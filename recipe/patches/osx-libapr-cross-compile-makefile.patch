@@ -1,0 +1,26 @@
+--- Makefile.in.orig	2021-01-11 22:06:02.000000000 -0800
++++ Makefile.in	2021-01-11 22:11:43.000000000 -0800
+@@ -20,6 +20,14 @@
+ DEFOSDIR=$(INCDIR)/arch/@DEFAULT_OSDIR@
+ INCLUDES=-I$(INCDIR) -I$(OSDIR) -I$(DEFOSDIR) -I$(top_srcdir)/include/arch/@DEFAULT_OSDIR@ -I$(top_srcdir)/include -I$(top_srcdir)/include/private -I$(top_blddir)/include/private
+ 
++cross_compiling = @cross_compiling@
++ifeq ($(cross_compiling),yes)
++  src_run = 
++else
++  src_run = ./tools/
++endif
++
++
+ #
+ # Macros for target determination
+ #
+@@ -142,7 +150,7 @@
+ 
+ include/private/apr_escape_test_char.h: tools/gen_test_char@EXEEXT@
+ 	$(APR_MKDIR) include/private
+-	tools/gen_test_char@EXEEXT@ > $@
++	$(src_run)gen_test_char@EXEEXT@ > $@
+ 
+ LINK_PROG = $(LIBTOOL) $(LTFLAGS) --mode=link $(COMPILE) $(LT_LDFLAGS) \
+ 	    @LT_NO_INSTALL@ $(ALL_LDFLAGS) -o $@

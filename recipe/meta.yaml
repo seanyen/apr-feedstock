@@ -11,6 +11,9 @@ source:
   - url: {{ mirror }}/apr/apr-{{ apr_ver }}.tar.gz
     folder: apr
     sha256: 70dcf9102066a2ff2ffc47e93c289c8e54c95d8dda23b503f9e61bb0cbd2d105
+    patches:
+      - patches/osx-libapr-cross-compile-configure.patch
+      - patches/osx-libapr-cross-compile-makefile.patch
   - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}.tar.gz
     folder: apr-util
     sha256: b65e40713da57d004123b6319828be7f1273fbc6490e145874ee1177e112c459
@@ -20,7 +23,7 @@ source:
   - path: cmake/  # [win]
 
 build:
-  number: 3
+  number: 4
   ignore_run_exports:                                           # [win]
     - expat                                                     # [win]
   skip: true  # [win and vc<14]
@@ -31,8 +34,10 @@ requirements:
     - cmake                                                     # [win]
     - ninja                                                     # [win]
     - libtool  # [not win]
+    - make  # [unix]
   host:
     - expat                                                     # [win]
+    - {{ compiler('c') }}  # [build_platform != target_platform]
   run:
     - libapr
     - libaprutil
