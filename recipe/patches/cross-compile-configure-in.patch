@@ -1,0 +1,10 @@
+--- configure.in.orig	2021-01-20 09:36:54.000000000 -0800
++++ configure.in	2021-01-20 09:38:07.000000000 -0800
+@@ -2843,6 +2843,7 @@
+ AC_SUBST(DEFAULT_OSDIR)
+ AC_SUBST(EXEEXT)
+ AC_SUBST(LIBTOOL_LIBS)
++AC_SUBST(cross_compiling)
+ 
+ # Use -no-install or -no-fast-install to link the test 
+ # programs on all platforms but Darwin, where it would cause

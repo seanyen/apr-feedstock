@@ -16,6 +16,8 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" && $target_platform == "osx-arm64"
   export ac_cv_sizeof_struct_iovec=16
 fi
 
+autoreconf -vfi
+
 ./configure --prefix="${PREFIX}" --host="${HOST}"
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
