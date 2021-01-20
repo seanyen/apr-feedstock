@@ -1,4 +1,4 @@
-{% set apr_ver = "1.6.5" %}
+{% set apr_ver = "1.7.0" %}
 {% set apu_ver = "1.6.1" %}
 {% set api_ver = "1.2.2" %}
 {% set mirror = "http://www-us.apache.org/dist/" %}
@@ -10,11 +10,10 @@ package:
 source:
   - url: {{ mirror }}/apr/apr-{{ apr_ver }}.tar.gz
     folder: apr
-    sha256: 70dcf9102066a2ff2ffc47e93c289c8e54c95d8dda23b503f9e61bb0cbd2d105
+    sha256: 48e9dbf45ae3fdc7b491259ffb6ccf7d63049ffacbc1c0977cced095e4c2d5a2
     patches:
-      - patches/cross-compile-configure-in.patch
-      - patches/osx-libapr-cross-compile-makefile.patch
       - patches/osx-libapr-darwin20-hints.patch
+      - patches/cross-compile-apr-866e1df.patch
   - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}.tar.gz
     folder: apr-util
     sha256: b65e40713da57d004123b6319828be7f1273fbc6490e145874ee1177e112c459

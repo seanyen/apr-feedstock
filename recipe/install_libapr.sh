@@ -20,20 +20,5 @@ autoreconf -vfi
 
 ./configure --prefix="${PREFIX}" --host="${HOST}"
 
-if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
-  (
-    mkdir -p native-build/bin
-    pushd native-build/bin
-
-    # MACOSX_DEPLOYMENT_TARGET is for the target_platform and not for build_platform
-    unset MACOSX_DEPLOYMENT_TARGET
-
-    $CC_FOR_BUILD ../../tools/gen_test_char.c -o gen_test_char
-
-    popd
-  )
-  export PATH=`pwd`/native-build/bin:$PATH
-fi
-
 make
 make install
