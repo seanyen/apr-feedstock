@@ -5,9 +5,13 @@ Home: http://apr.apache.org/
 
 Package license: Apache-2.0
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/apr-feedstock/blob/master/LICENSE.txt)
 
 Summary: Maintains a consistent API with predictable behaviour
+
+Development: https://svn.apache.org/viewvc/apr
+
+Documentation: https://apr.apache.org/docs/apr/1.6/index.html
 
 Apache Portable Run-time libraries have been designed to provide a common
 interface to low level routines across any platform.The original goal of APR
@@ -71,6 +75,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6273&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/apr-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6273&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/apr-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr><tr>

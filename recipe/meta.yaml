@@ -1,4 +1,4 @@
-{% set apr_ver = "1.6.5" %}
+{% set apr_ver = "1.7.0" %}
 {% set apu_ver = "1.6.1" %}
 {% set api_ver = "1.2.2" %}
 {% set mirror = "http://www-us.apache.org/dist/" %}
@@ -10,7 +10,11 @@ package:
 source:
   - url: {{ mirror }}/apr/apr-{{ apr_ver }}.tar.gz
     folder: apr
-    sha256: 70dcf9102066a2ff2ffc47e93c289c8e54c95d8dda23b503f9e61bb0cbd2d105
+    sha256: 48e9dbf45ae3fdc7b491259ffb6ccf7d63049ffacbc1c0977cced095e4c2d5a2
+    patches:
+      - patches/osx-libapr-darwin20-hints.patch
+      # backport of commit 866e1df from upstream
+      - patches/cross-compile-apr-866e1df.patch
   - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}.tar.gz
     folder: apr-util
     sha256: b65e40713da57d004123b6319828be7f1273fbc6490e145874ee1177e112c459
@@ -20,7 +24,7 @@ source:
   - path: cmake/  # [win]
 
 build:
-  number: 2
+  number: 3
   ignore_run_exports:                                           # [win]
     - expat                                                     # [win]
   skip: true  # [win and vc<14]
@@ -30,8 +34,11 @@ requirements:
     - {{ compiler('c') }}
     - cmake                                                     # [win]
     - ninja                                                     # [win]
+    - libtool  # [not win]
+    - make  # [unix]
   host:
     - expat                                                     # [win]
+    - {{ compiler('c') }}  # [build_platform != target_platform]
   run:
     - libapr
     - libaprutil
@@ -51,6 +58,10 @@ outputs:
         - make                                                  # [unix]
         - cmake                                                 # [win]
         - ninja                                                 # [win]
+        - libtool  # [not win]
+        - autoconf  # [unix]
+        - automake  # [unix]
+        - gettext  # [unix]
       host:
     script: install_libapr.sh                                   # [unix]
     script: install_libapr.bat                                  # [win]
@@ -76,6 +87,7 @@ outputs:
         - make                                                  # [unix]
         - cmake                                                 # [win]
         - ninja                                                 # [win]
+        - libtool  # [not win]
       host:
         - expat
         - libapr
@@ -104,6 +116,7 @@ outputs:
         - make                                                  # [unix]
         - cmake                                                 # [win]
         - ninja                                                 # [win]
+        - libtool  # [not win]
       host:
         - libapr
     script: install_libapriconv.sh                              # [unix]
