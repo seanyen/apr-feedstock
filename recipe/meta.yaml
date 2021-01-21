@@ -13,6 +13,7 @@ source:
     sha256: 48e9dbf45ae3fdc7b491259ffb6ccf7d63049ffacbc1c0977cced095e4c2d5a2
     patches:
       - patches/osx-libapr-darwin20-hints.patch
+      # backport of commit 866e1df from upstream
       - patches/cross-compile-apr-866e1df.patch
   - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}.tar.gz
     folder: apr-util
