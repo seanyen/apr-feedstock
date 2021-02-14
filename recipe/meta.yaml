@@ -15,6 +15,7 @@ source:
       - patches/osx-libapr-darwin20-hints.patch
       # backport of commit 866e1df from upstream
       - patches/cross-compile-apr-866e1df.patch
+      - patches/cross-compile-osx-arm64-strerror.patch  # [osx and build_platform != target_platform]
   - url: {{ mirror }}/apr/apr-util-{{ apu_ver }}.tar.gz
     folder: apr-util
     sha256: b65e40713da57d004123b6319828be7f1273fbc6490e145874ee1177e112c459
@@ -24,7 +25,7 @@ source:
   - path: cmake/  # [win]
 
 build:
-  number: 3
+  number: 4
   ignore_run_exports:                                           # [win]
     - expat                                                     # [win]
   skip: true  # [win and vc<14]
