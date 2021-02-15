@@ -199,6 +199,3 @@ Feedstock Maintainers
 * [@nehaljwani](https://github.com/nehaljwani/)
 * [@seanyen](https://github.com/seanyen/)
 
-
-<!-- dummy commit to enable rerendering -->
-
